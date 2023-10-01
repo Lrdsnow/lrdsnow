@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Detail</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #ff6cff;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-start; /* Adjust alignment to the left */
+            align-items: center;
+        }
+
+        .back-button {
+            padding: 5px 10px;
+            background-color: #ff6cff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Banner styles */
+        .banner {
+            width: 100%;
+            max-width: 100%;
+            height: 200px; /* Set your desired fixed height */
+            object-fit: cover; /* Clip and center the image within the fixed height */
+            border-radius: 15px;
+            margin: 10px 0;
+            padding: 10px; /* Add padding to the banner */
+            overflow: hidden; /* Hide any content that overflows the fixed height */
+        }
+
+        /* Package info styles */
+        .package-info {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #000;
+        }
+
+        .package-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
+
+        .package-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .package-author {
+            font-size: 14px;
+            color: rgba(255, 108, 255, 0.7);
+        }
+
+        .package-description {
+            font-size: 16px;
+        }
+
+        /* Description styles */
+        .description {
+            padding: 20px;
+            background-color: #000;
+        }
+
+        /* Screenshots styles */
+        .screenshots {
+            padding: 20px;
+            background-color: #000;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .screenshot {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with back button -->
+    <div class="header">
+        <a class="back-button" href="javascript:window.history.back();">Go Back</a>
+    </div>
+
+    <!-- Banner -->
+    <img class="banner" src="" alt="Package Banner" id="package-banner">
+
+    <!-- Package Info -->
+    <div class="package-info">
+        <img class="package-icon" src="" alt="Package Icon" id="package-icon">
+        <div>
+            <h2 class="package-title" id="package-title">Package Name</h2>
+            <p class="package-author" id="package-author">By Author v1.0</p>
+            <p class="package-description" id="package-description">Package Description</p>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="description">
+        <h2>Description</h2>
+        <p id="package-long-description">Package long description goes here. This is a longer description of the package and its features.</p>
+    </div>
+
+    <!-- Screenshots -->
+    <div class="screenshots">
+        <h2>Preview</h2>
+        <!-- Screenshots will be added here dynamically -->
+    </div>
+    
+    <!-- JavaScript to populate content -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to extract query parameters from the URL
+            function getQueryParameter(name) {
+                const urlSearchParams = new URLSearchParams(window.location.search);
+                try {
+                    const decodedValue = decodeURIComponent(urlSearchParams.get(name));
+                    return decodedValue || ''; // Use an empty string if the decoded value is falsy
+                } catch (error) {
+                    console.error(`Error decoding parameter '${name}':`, error);
+                    return ''; // Return an empty string in case of decoding error
+                }
+            }
+
+            // Populate content with package details from query parameters
+            const packageName = getQueryParameter('name');
+            console.log('packageName:', packageName);
+            if (packageName) {
+                document.getElementById('package-title').textContent = packageName;
+            }
+
+            const author = getQueryParameter('author');
+            const version = getQueryParameter('version');
+            console.log('author:', author);
+            console.log('version:', version);
+            if (author && version) {
+                document.getElementById('package-author').textContent = `By ${author} v${version}`;
+            }
+
+            const description = getQueryParameter('desc');
+            console.log('description:', description);
+            if (description) {
+                document.getElementById('package-description').textContent = description;
+            }
+
+            const longDescription = getQueryParameter('long_desc');
+            console.log('longDescription:', longDescription);
+            if (longDescription) {
+                document.getElementById('package-long-description').textContent = longDescription;
+            }
+
+            const icon = getQueryParameter('icon');
+            console.log('icon:', icon);
+            if (icon) {
+                document.getElementById('package-icon').src = icon;
+            }
+
+            const banner = getQueryParameter('banner');
+            console.log('banner:', banner);
+            if (banner) {
+                document.getElementById('package-banner').src = banner;
+            }
+
+            const screenshotUrls = getQueryParameter('screenshots');
+            console.log('screenshotUrls:', screenshotUrls);
+            if (screenshotUrls) {
+                const screenshotUrlsArray = screenshotUrls.split(',');
+                const screenshotsContainer = document.querySelector('.screenshots');
+                screenshotUrlsArray.forEach((screenshotUrl) => {
+                    if (screenshotUrl) {
+                        const img = document.createElement('img');
+                        img.className = 'screenshot';
+                        img.src = screenshotUrl;
+                        img.alt = 'Screenshot';
+                        screenshotsContainer.appendChild(img);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
