@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PureFlux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #ff6cff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            padding: 10px;
+            background-color: #000;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(255, 108, 255, 0.5);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .app-container:hover {
+            transform: scale(1.02);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+            border-radius: 10px;
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .repo-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .app-description {
+            font-size: 14px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-list"></div>
+    <div id="package-detail" style="display: none;"></div>
+
+    <script>
+        const appList = document.getElementById('app-list');
+        const packageDetail = document.getElementById('package-detail');
+        const jsonUrl = 'https://raw.githubusercontent.com/Broco8Dev/Flux/main/RepositoryManagement/Repos.json';
+        function showPackageDetail(mainURL, app, appName) {
+            const name = appName;
+            const description = app.shortDesc;
+            const long_description = app.longDesc;
+            const author = app.author;
+            const icon = app.b64icon;
+            const screenshot = app.preview;
+            const detailURL = `flux_detail.html?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(description)}&long_desc=${encodeURIComponent(long_description)}&author=${encodeURIComponent(author)}&screenshot=${encodeURIComponent(screenshot)}&url=${encodeURIComponent(mainURL)}&icon=${encodeURIComponent(icon)}`;
+            window.location.href = detailURL;
+        }
+        function hidePackageDetail() {
+            packageDetail.style.display = 'none';
+            appList.style.display = 'block';
+        }
+        async function fetchApps() {
+            try {
+                const response = await fetch(jsonUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const jsonData = await response.json();
+
+                const repoName = "Flux Repo"; // Set the repo name to "Flux Repo"
+                const repoHeader = document.createElement('h2');
+                repoHeader.textContent = repoName;
+                repoHeader.className = 'repo-title';
+                appList.appendChild(repoHeader);
+
+                for (const appName in jsonData) {
+                    if (jsonData.hasOwnProperty(appName) && typeof jsonData[appName] === 'object') {
+                        const appData = jsonData[appName];
+
+                        const appContainer = document.createElement('div');
+                        appContainer.className = 'app-container';
+
+                        // Create an img element for the base64-encoded icon
+                        const appIcon = document.createElement('img');
+                        appIcon.className = 'app-icon';
+                        appIcon.src = `data:image/png;base64,${appData.b64icon}`; // Assuming the icon is in PNG format
+                        appContainer.appendChild(appIcon);
+
+                        const appInfo = document.createElement('div');
+                        const appTitle = document.createElement('p');
+                        appTitle.className = 'app-title';
+                        appTitle.textContent = appName;
+                        appInfo.appendChild(appTitle);
+
+                        const appDescription = document.createElement('p');
+                        appDescription.className = 'app-description';
+                        appDescription.textContent = appData.shortDesc;
+                        appInfo.appendChild(appDescription);
+
+                        appContainer.appendChild(appInfo);
+                        appContainer.addEventListener('click', () => {
+                            showPackageDetail(appData.link, appData, appName);
+                        });
+
+                        appList.appendChild(appContainer);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchApps();
+    </script>
+</body>
+</html>
