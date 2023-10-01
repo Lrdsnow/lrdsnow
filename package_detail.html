@@ -114,6 +114,8 @@
             <h2 class="package-title" id="package-title">Package Name</h2>
             <p class="package-author" id="package-author">By Author v1.0</p>
             <p class="package-description" id="package-description">Package Description</p>
+            <pre></pre>
+            <a class="back-button" id="install-button" href="">Open In PureKFD</a>
         </div>
     </div>
 
@@ -145,6 +147,12 @@
             }
 
             // Populate content with package details from query parameters
+            const packageID = getQueryParameter('pkgid');
+            console.log('packageID:', packageID);
+            if (packageID) {
+                document.getElementById('install-button').href = "purekfd://"+packageID;
+            }
+            
             const packageName = getQueryParameter('name');
             console.log('packageName:', packageName);
             if (packageName) {

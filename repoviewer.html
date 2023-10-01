@@ -71,6 +71,7 @@
             'https://bomberfish.ca/PicassoRepos/Essentials/manifest.json'
         ];
         function showPackageDetail(mainURL, app) {
+            const pkgid = app.bundleid;
             const name = app.name;
             const description = app.description;
             const long_description = app.long_description;
@@ -79,7 +80,7 @@
             const icon = mainURL + app.icon;
             const banner = mainURL + app.banner;
             const screenshots = app.screenshots.map((screenshot) => mainURL + screenshot);
-            const detailURL = `package_detail.html?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(description)}&long_desc=${encodeURIComponent(long_description)}&version=${encodeURIComponent(version)}&author=${encodeURIComponent(author)}&icon=${encodeURIComponent(icon)}&banner=${encodeURIComponent(banner)}&screenshots=${encodeURIComponent(screenshots.join(','))}`;
+            const detailURL = `package_detail.html?pkgid=${encodeURIComponent(pkgid)}&name=${encodeURIComponent(name)}&desc=${encodeURIComponent(description)}&long_desc=${encodeURIComponent(long_description)}&version=${encodeURIComponent(version)}&author=${encodeURIComponent(author)}&icon=${encodeURIComponent(icon)}&banner=${encodeURIComponent(banner)}&screenshots=${encodeURIComponent(screenshots.join(','))}`;
             window.location.href = detailURL;
         }
         function hidePackageDetail() {
