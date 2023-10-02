@@ -66,21 +66,13 @@
             'https://raw.githubusercontent.com/Lrdsnow/lrdsnows-repo/main/PureKFDv4/purerepo.json',
             'https://raw.githubusercontent.com/Dreel0akl/poopypoopermaybeworking/master/Essentials/manifest.json',
             'https://raw.githubusercontent.com/dora727/KaedeFriedDora/master/Essentials/manifest.json',
+            'https://raw.githubusercontent.com/34306/iPA/main/repo.json',
             'https://raw.githubusercontent.com/circularsprojects/circles-repo/main/manifest.json',
             'https://raw.githubusercontent.com/sourcelocation/Picasso-test-repo/main/manifest.json',
             'https://bomberfish.ca/PicassoRepos/Essentials/manifest.json'
         ];
-        function showPackageDetail(mainURL, app) {
-            const pkgid = app.bundleid;
-            const name = app.name;
-            const description = app.description;
-            const long_description = app.long_description;
-            const version = app.version;
-            const author = app.author;
-            const icon = mainURL + app.icon;
-            const banner = mainURL + app.banner;
-            const screenshots = app.screenshots.map((screenshot) => mainURL + screenshot);
-            const detailURL = `package_detail.html?pkgid=${encodeURIComponent(pkgid)}&name=${encodeURIComponent(name)}&desc=${encodeURIComponent(description)}&long_desc=${encodeURIComponent(long_description)}&version=${encodeURIComponent(version)}&author=${encodeURIComponent(author)}&icon=${encodeURIComponent(icon)}&banner=${encodeURIComponent(banner)}&screenshots=${encodeURIComponent(screenshots.join(','))}`;
+        function showPackageDetail(mainURL) {
+            const detailURL = `pkgviewer.html?repourl=${encodeURIComponent(mainURL)}`;
             window.location.href = detailURL;
         }
         function hidePackageDetail() {
@@ -92,34 +84,26 @@
                 try {
                     const response = await fetch(url);
                     const data = await response.json();
-                    const repoName = data.name;
-                    const packages = data.packages;
-                    const repoHeader = document.createElement('h2');
-                    repoHeader.textContent = repoName;
-                    repoHeader.className = 'repo-title';
-                    appList.appendChild(repoHeader);
-                    packages.forEach((app) => {
-                        const appContainer = document.createElement('div');
-                        appContainer.className = 'app-container';
-                        const appIcon = document.createElement('img');
-                        appIcon.className = 'app-icon';
-                        appIcon.src = url.substring(0, url.lastIndexOf('/') + 1) + app.icon;
-                        appContainer.appendChild(appIcon);
-                        const appInfo = document.createElement('div');
-                        const appTitle = document.createElement('p');
-                        appTitle.className = 'app-title';
-                        appTitle.textContent = app.name;
-                        appInfo.appendChild(appTitle);
-                        const appDescription = document.createElement('p');
-                        appDescription.className = 'app-description';
-                        appDescription.textContent = app.description;
-                        appInfo.appendChild(appDescription);
-                        appContainer.appendChild(appInfo);
-                        appContainer.addEventListener('click', () => {
-                            showPackageDetail(url.substring(0, url.lastIndexOf('/') + 1), app);
-                        });
-                        appList.appendChild(appContainer);
+                    const appContainer = document.createElement('div');
+                    appContainer.className = 'app-container';
+                    const appIcon = document.createElement('img');
+                    appIcon.className = 'app-icon';
+                    appIcon.src = data.RepositoryIcon ?? url.substring(0, url.lastIndexOf('/') + 1) + data.icon;
+                    appContainer.appendChild(appIcon);
+                    const appInfo = document.createElement('div');
+                    const appTitle = document.createElement('p');
+                    appTitle.className = 'app-title';
+                    appTitle.textContent = data.name ?? data.RepositoryName;
+                    appInfo.appendChild(appTitle);
+                    const appDescription = document.createElement('p');
+                    appDescription.className = 'app-description';
+                    appDescription.textContent = data.description ?? data.RepositoryDescription;
+                    appInfo.appendChild(appDescription);
+                    appContainer.appendChild(appInfo);
+                    appContainer.addEventListener('click', () => {
+                        showPackageDetail(url);
                     });
+                    appList.appendChild(appContainer);
                 } catch (error) {
                     console.error(`Error fetching data from ${url}:`, error);
                 }

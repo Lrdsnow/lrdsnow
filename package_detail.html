@@ -101,11 +101,12 @@
 <body>
     <!-- Header with back button -->
     <div class="header">
-        <a class="back-button" href="javascript:window.history.back();">Go Back</a>
+        <a class="back-button" href="javascript:window.history.back();">Back</a>
     </div>
 
     <!-- Banner -->
-    <img class="banner" src="" alt="Package Banner" id="package-banner">
+    <div class="banner_container">
+    </div>
 
     <!-- Package Info -->
     <div class="package-info">
@@ -121,19 +122,22 @@
 
     <!-- Description -->
     <div class="description">
-        <h2>Description</h2>
-        <p id="package-long-description">Package long description goes here. This is a longer description of the package and its features.</p>
     </div>
 
     <!-- Screenshots -->
     <div class="screenshots">
-        <h2>Preview</h2>
         <!-- Screenshots will be added here dynamically -->
     </div>
     
     <!-- JavaScript to populate content -->
-    <script>
+    <script>        
         document.addEventListener("DOMContentLoaded", function () {
+            // Function to check if URL's are valid
+            function isValidURL(url) {
+                const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+                return urlPattern.test(url);
+            }
+
             // Function to extract query parameters from the URL
             function getQueryParameter(name) {
                 const urlSearchParams = new URLSearchParams(window.location.search);
@@ -146,8 +150,15 @@
                 }
             }
 
-            // Populate content with package details from query parameters
-            const packageID = getQueryParameter('pkgid');
+            // Get Repo URL
+            const repourl = getQueryParameter('repourl');
+            console.log('Repo URL:', repourl);
+            if (repourl) {
+                
+            }
+
+            // Get Package ID
+            const packageID = getQueryParameter('id');
             console.log('packageID:', packageID);
             if (packageID) {
                 document.getElementById('install-button').href = "purekfd://"+packageID;
@@ -176,7 +187,15 @@
             const longDescription = getQueryParameter('long_desc');
             console.log('longDescription:', longDescription);
             if (longDescription) {
-                document.getElementById('package-long-description').textContent = longDescription;
+                if (longDescription != "undefined") {
+                    const descContainer = document.querySelector('.description');
+                    const label = document.createElement("h2");
+                    label.textContent = "Description";
+                    descContainer.appendChild(label);
+                    const desc = document.createElement("p");
+                    desc.textContent = longDescription;
+                    descContainer.appendChild(desc);
+                }
             }
 
             const icon = getQueryParameter('icon');
@@ -185,17 +204,14 @@
                 document.getElementById('package-icon').src = icon;
             }
 
-            const banner = getQueryParameter('banner');
-            console.log('banner:', banner);
-            if (banner) {
-                document.getElementById('package-banner').src = banner;
-            }
-
             const screenshotUrls = getQueryParameter('screenshots');
             console.log('screenshotUrls:', screenshotUrls);
             if (screenshotUrls) {
                 const screenshotUrlsArray = screenshotUrls.split(',');
                 const screenshotsContainer = document.querySelector('.screenshots');
+                const label = document.createElement("h2");
+                label.textContent = "Preview";
+                screenshotsContainer.appendChild(label);
                 screenshotUrlsArray.forEach((screenshotUrl) => {
                     if (screenshotUrl) {
                         const img = document.createElement('img');
@@ -205,6 +221,18 @@
                         screenshotsContainer.appendChild(img);
                     }
                 });
+            }
+
+            const banner = getQueryParameter('banner');
+            console.log('banner:', banner);
+            if (banner) {
+                if (!banner.includes("/undefined")) {
+                    const bannerContainer = document.querySelector('.banner_container');
+                    const img = document.createElement('img');
+                    img.className = 'banner'
+                    img.src = banner;
+                    bannerContainer.appendChild(img)
+                }
             }
         });
     </script>
