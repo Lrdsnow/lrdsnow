@@ -86,16 +86,7 @@
         var jsonUrls = [];
         function showPackageDetail(mainURL, app) {
             const pkgid = app.bundleid ?? app.PackageID;
-            const name = app.name ?? app.Name;
-            const description = app.description ?? app.Description;
-            const long_description = app.long_description ?? app.Caption;
-            const version = app.version ?? app.Releases[0].Version;
-            const author = app.author ?? app.Author.Label;
-            const icon = app.Icon ?? mainURL + app.icon;
-            const banner = app.HeaderImage ?? mainURL + app.banner;
-            const raw_screenshots = app.Screenshot ?? app.screenshots ?? [];
-            const screenshots = raw_screenshots.map((screenshot) => mainURL + screenshot);
-            const detailURL = `package_detail.html?repourl=${encodeURIComponent(mainURL)}&id=${encodeURIComponent(pkgid)}&name=${encodeURIComponent(name)}&desc=${encodeURIComponent(description)}&long_desc=${encodeURIComponent(long_description)}&version=${encodeURIComponent(version)}&author=${encodeURIComponent(author)}&icon=${encodeURIComponent(icon)}&banner=${encodeURIComponent(banner)}&screenshots=${encodeURIComponent(screenshots.join(','))}`;
+            const detailURL = `package_detail.html?repourl=${encodeURIComponent(mainURL)}&id=${encodeURIComponent(pkgid)}`;
             window.location.href = detailURL;
         }
         function hidePackageDetail() {
@@ -131,7 +122,7 @@
                         appInfo.appendChild(appDescription);
                         appContainer.appendChild(appInfo);
                         appContainer.addEventListener('click', () => {
-                            showPackageDetail(url.substring(0, url.lastIndexOf('/') + 1), app);
+                            showPackageDetail(url, app);
                         });
                         appList.appendChild(appContainer);
                     });
