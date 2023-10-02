@@ -56,20 +56,43 @@
     </style>
 </head>
 <body>
-    <div id="app-list"></div>
+    <div id="purekfd-repos">
+        <h2 class="repo-title">PureKFD Repos</h2>
+    </div>
+    <div id="picasso-repos">
+        <h2 class="repo-title">Picasso Repos</h2>
+    </div>
+    <div id="misaka-repos">
+        <h2 class="repo-title">Misaka Repos</h2>
+    </div>
     <div id="package-detail" style="display: none;"></div>
 
     <script>
-        const appList = document.getElementById('app-list');
         const packageDetail = document.getElementById('package-detail');
         const jsonUrls = [
             'https://raw.githubusercontent.com/Lrdsnow/lrdsnows-repo/main/PureKFDv4/purerepo.json',
             'https://raw.githubusercontent.com/Dreel0akl/poopypoopermaybeworking/master/Essentials/manifest.json',
             'https://raw.githubusercontent.com/dora727/KaedeFriedDora/master/Essentials/manifest.json',
-            'https://raw.githubusercontent.com/34306/iPA/main/repo.json',
-            'https://raw.githubusercontent.com/circularsprojects/circles-repo/main/manifest.json',
             'https://raw.githubusercontent.com/sourcelocation/Picasso-test-repo/main/manifest.json',
-            'https://bomberfish.ca/PicassoRepos/Essentials/manifest.json'
+            'https://bomberfish.ca/PicassoRepos/Essentials/manifest.json',
+            'https://raw.githubusercontent.com/circularsprojects/circles-repo/main/manifest.json',
+            'https://raw.githubusercontent.com/hanabiADHD/nbxyRepo/main/repo.json',
+            'https://puck.roeegh.com/repo.json',
+            'https://raw.githubusercontent.com/huligang/coolwcat/main/repo.json',
+            'https://yangjiii.tech/file/Repo/repo.json',
+            'https://raw.githubusercontent.com/leminlimez/leminrepo/main/repo.json',
+            'https://raw.githubusercontent.com/ichitaso/misaka/main/repo.json',
+            'https://raw.githubusercontent.com/chimaha/misakarepo/main/repo.json',
+            'https://raw.githubusercontent.com/sugiuta/repo-mdc/master/repo.json',
+            'https://raw.githubusercontent.com/34306/iPA/main/repo.json',
+            'https://raw.githubusercontent.com/EPOS05/EPOSbox/main/misaka.json',
+            'https://raw.githubusercontent.com/kloytofyexploiter/Misaka-repo_MRX/main/repo.json',
+            'https://raw.githubusercontent.com/HackZy01/misio/main/repo.json',
+            'https://misakarepojson.pages.dev/repo.json',
+            'https://raw.githubusercontent.com/sadending-ios/sadending.github.io/main/Misaka%20Tweaks/Ringtones%20Customer/repo.json',
+            'https://raw.githubusercontent.com/tyler10290/MisakaRepoBackup/main/repo.json',
+            'https://raw.githubusercontent.com/hanabiADHD/DekotasMirror/main/dekotas.json',
+            'https://gist.githubusercontent.com/c22dev/af8dd3a760330eb31da5f8751af1b487/raw/6eb744fabc6eb0eb3352ce41c9a08ce5c38c4e6a/index.json'
         ];
         function showPackageDetail(mainURL) {
             const detailURL = `pkgviewer.html?repourl=${encodeURIComponent(mainURL)}`;
@@ -103,7 +126,16 @@
                     appContainer.addEventListener('click', () => {
                         showPackageDetail(url);
                     });
-                    appList.appendChild(appContainer);
+                    if (Object.keys(data).includes("RepositoryName")) {
+                        const appList = document.getElementById('misaka-repos');
+                        appList.appendChild(appContainer);
+                    } else if (Object.keys(data).includes("repotype")) {
+                        const appList = document.getElementById('purekfd-repos');
+                        appList.appendChild(appContainer);
+                    } else {
+                        const appList = document.getElementById('picasso-repos');
+                        appList.appendChild(appContainer);
+                    }
                 } catch (error) {
                     console.error(`Error fetching data from ${url}:`, error);
                 }
