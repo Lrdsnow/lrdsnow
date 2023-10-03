@@ -10,9 +10,11 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #000;
-            color: #ff6cff;
+            color: #ae00ff;
             margin: 0;
             padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         .app-container {
@@ -20,7 +22,7 @@
             background-color: #000;
             margin: 10px;
             border-radius: 10px;
-            box-shadow: 0px 0px 5px rgba(255, 108, 255, 0.5);
+            box-shadow: 0px 0px 5px rgba(183, 0, 255, 0.5);
             cursor: pointer;
             transition: transform 0.2s ease-in-out;
             display: flex;
@@ -71,7 +73,7 @@
             'https://raw.githubusercontent.com/loyahdev/hydrogen/main/lsthemes.txt'
         ];
         function showPackageDetail(mainURL, appName) {
-            const detailURL = `flux_detail.html?name=${encodeURIComponent(appName)}&repourl=${encodeURIComponent(mainURL)}`;
+            const detailURL = `flux_detail.html?repourl=${encodeURIComponent(mainURL)}&name=${encodeURIComponent(appName)}`;
             window.location.href = detailURL;
         }
         function parseString(inputString) {
