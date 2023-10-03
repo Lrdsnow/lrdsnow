@@ -174,14 +174,13 @@
                             const app = data[appkey]
                             document.getElementById('install-button').href = app.link;
                             const name = packageName;
-                            const description = app.description ?? app.Description;
-                            const longDescription = app.long_description ?? app.Caption;
+                            const description = app.shortDesc;
+                            const longDescription = app.longDesc;
                             const version = app.version ?? "1.0.0";
                             const author = app.author ?? "";
                             const icon = app.b64icon;
                             const banner = app.HeaderImage ?? url.substring(0, url.lastIndexOf('/') + 1) + app.banner;
-                            const raw_screenshots = app.Screenshot ?? app.screenshots ?? [];
-                            const screenshotUrls = raw_screenshots.map((screenshot) => url.substring(0, url.lastIndexOf('/') + 1) + screenshot);
+                            const screenshotUrls = [app.preview];
                             document.getElementById('package-title').textContent = name;
                             document.getElementById('package-author').textContent = `${author} v${version}`;
                             document.getElementById('package-description').textContent = description;
@@ -197,7 +196,7 @@
                                 descContainer.appendChild(desc);
                             }
                             console.log(screenshotUrls)
-                            if (screenshotUrls.length != 0) {
+                            if (screenshotUrls[0] != undefined) {
                                 const screenshotUrlsArray = screenshotUrls;
                                 const screenshotsContainer = document.querySelector('.screenshots');
                                 const label = document.createElement("h2");
