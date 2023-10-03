@@ -15,7 +15,7 @@
 
         .back-button {
             padding: 5px 10px;
-            background-color: #ff6cff;
+            background-color: #ae00ff;
             color: #000;
             text-decoration: none;
             border-radius: 5px;
@@ -24,7 +24,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #000;
-            color: #ff6cff;
+            color: #ae00ff;
             margin: 0;
             padding: 0;
         }
@@ -34,7 +34,7 @@
             background-color: #000;
             margin: 10px;
             border-radius: 10px;
-            box-shadow: 0px 0px 5px rgba(255, 108, 255, 0.5);
+            box-shadow: 0px 0px 5px rgba(183, 0, 255, 0.5);
             cursor: pointer;
             transition: transform 0.2s ease-in-out;
             display: flex;
@@ -147,7 +147,35 @@
             const repourl = getQueryParameter('repourl');
             console.log('Repo URL:', repourl);
             if (repourl) {
-                jsonUrls = [repourl]
+                if (repourl == "all") {
+                    jsonUrls = [
+                        'https://raw.githubusercontent.com/Lrdsnow/lrdsnows-repo/main/PureKFDv4/purerepo.json',
+                        'https://raw.githubusercontent.com/Dreel0akl/poopypoopermaybeworking/master/Essentials/manifest.json',
+                        'https://raw.githubusercontent.com/dora727/KaedeFriedDora/master/Essentials/manifest.json',
+                        'https://raw.githubusercontent.com/sourcelocation/Picasso-test-repo/main/manifest.json',
+                        'https://bomberfish.ca/PicassoRepos/Essentials/manifest.json',
+                        'https://raw.githubusercontent.com/circularsprojects/circles-repo/main/manifest.json',
+                        'https://raw.githubusercontent.com/hanabiADHD/nbxyRepo/main/repo.json',
+                        'https://puck.roeegh.com/repo.json',
+                        'https://raw.githubusercontent.com/huligang/coolwcat/main/repo.json',
+                        'https://yangjiii.tech/file/Repo/repo.json',
+                        'https://raw.githubusercontent.com/leminlimez/leminrepo/main/repo.json',
+                        'https://raw.githubusercontent.com/ichitaso/misaka/main/repo.json',
+                        'https://raw.githubusercontent.com/chimaha/misakarepo/main/repo.json',
+                        'https://raw.githubusercontent.com/sugiuta/repo-mdc/master/repo.json',
+                        'https://raw.githubusercontent.com/34306/iPA/main/repo.json',
+                        'https://raw.githubusercontent.com/EPOS05/EPOSbox/main/misaka.json',
+                        'https://raw.githubusercontent.com/kloytofyexploiter/Misaka-repo_MRX/main/repo.json',
+                        'https://raw.githubusercontent.com/HackZy01/misio/main/repo.json',
+                        'https://misakarepojson.pages.dev/repo.json',
+                        'https://raw.githubusercontent.com/sadending-ios/sadending.github.io/main/Misaka%20Tweaks/Ringtones%20Customer/repo.json',
+                        'https://raw.githubusercontent.com/tyler10290/MisakaRepoBackup/main/repo.json',
+                        'https://raw.githubusercontent.com/hanabiADHD/DekotasMirror/main/dekotas.json',
+                        'https://gist.githubusercontent.com/c22dev/af8dd3a760330eb31da5f8751af1b487/raw/6eb744fabc6eb0eb3352ce41c9a08ce5c38c4e6a/index.json'
+                    ];
+                } else {
+                    jsonUrls = [repourl]
+                }
             }
             fetchApps();
         });
