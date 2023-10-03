@@ -100,10 +100,6 @@
             const detailURL = `pkgviewer.html?repourl=${encodeURIComponent(mainURL)}`;
             window.location.href = detailURL;
         }
-        function hidePackageDetail() {
-            packageDetail.style.display = 'none';
-            appList.style.display = 'block';
-        }
         async function fetchApps() {
             for (const url of jsonUrls) {
                 try {

@@ -15,7 +15,9 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #000;
-            color: #ff6cff;
+            color: #ae00ff;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         /* Header styles */
@@ -29,10 +31,22 @@
 
         .back-button {
             padding: 5px 10px;
-            background-color: #ff6cff;
+            background-color: #ae00ff;
             color: #000;
             text-decoration: none;
             border-radius: 5px;
+        }
+
+        /* Banner styles */
+        .banner {
+            width: 100%;
+            max-width: 100%;
+            height: 200px; /* Set your desired fixed height */
+            object-fit: cover; /* Clip and center the image within the fixed height */
+            border-radius: 15px;
+            margin: 10px 0;
+            padding: 10px; /* Add padding to the banner */
+            overflow: hidden; /* Hide any content that overflows the fixed height */
         }
 
         /* Package info styles */
@@ -57,7 +71,7 @@
 
         .package-author {
             font-size: 14px;
-            color: rgba(255, 108, 255, 0.7);
+            color: rgba(183, 0, 255, 0.7);
         }
 
         .package-description {
@@ -87,18 +101,21 @@
     </style>
 </head>
 <body>
-    <!-- Header with back button
+    <!-- Header with back button -->
     <div class="header">
-        <a class="back-button" href="javascript:window.history.back();">Go Back</a>
+        <a class="back-button" href="javascript:window.history.back();">Back</a>
     </div>
-    -->
+
+    <!-- Banner -->
+    <div class="banner_container">
+    </div>
 
     <!-- Package Info -->
     <div class="package-info">
-        <img class="package-icon" id="package-icon" src="data:image/png;base64,[BASE64_ENCODED_ICON]" alt="Package Icon">
+        <img class="package-icon" src="" alt="Package Icon" id="package-icon">
         <div>
             <h2 class="package-title" id="package-title">Package Name</h2>
-            <p class="package-author" id="package-author">By Author</p>
+            <p class="package-author" id="package-author">By Author v1.0</p>
             <p class="package-description" id="package-description">Package Description</p>
             <pre></pre>
             <a class="back-button" id="install-button" href="">Install</a>
@@ -107,18 +124,107 @@
 
     <!-- Description -->
     <div class="description">
-        <h2>Description</h2>
-        <p id="package-long-description">Package long description goes here. This is a longer description of the package and its features.</p>
     </div>
 
     <!-- Screenshots -->
     <div class="screenshots">
-        <h2>Preview</h2>
+        <!-- Screenshots will be added here dynamically -->
     </div>
     
     <!-- JavaScript to populate content -->
-    <script>
+    <script>        
         document.addEventListener("DOMContentLoaded", function () {
+            // Function to check if URL's are valid
+            function isValidURL(url) {
+                const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+                return urlPattern.test(url);
+            }
+
+            function parseString(inputString) {
+                const result = {};
+                const lines = inputString.split('\n');
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line != "") {
+                        result[lines[i]] = {
+                            "shortDesc": lines[i + 1],
+                            "link": lines[i + 2],
+                            "version": lines[i + 3],
+                            "b64icon": lines[i + 4]
+                        };
+                    }
+                    i += 4;
+                }
+                return result;
+            }
+
+            async function loadPackageDataFromURL(url) {
+                const response = await fetch(url);
+                const responseBody = await response.text();
+                const data = await (async () => {
+                    try {
+                        return JSON.parse(responseBody);
+                    } catch (error) {
+                        return parseString(responseBody)
+                    }
+                })();
+                if (data) {
+                    Object.keys(data).forEach((appkey) => {
+                        if (appkey == packageName) {
+                            const app = data[appkey]
+                            document.getElementById('install-button').href = app.link;
+                            const name = packageName;
+                            const description = app.description ?? app.Description;
+                            const longDescription = app.long_description ?? app.Caption;
+                            const version = app.version ?? "1.0.0";
+                            const author = app.author ?? "";
+                            const icon = app.b64icon;
+                            const banner = app.HeaderImage ?? url.substring(0, url.lastIndexOf('/') + 1) + app.banner;
+                            const raw_screenshots = app.Screenshot ?? app.screenshots ?? [];
+                            const screenshotUrls = raw_screenshots.map((screenshot) => url.substring(0, url.lastIndexOf('/') + 1) + screenshot);
+                            document.getElementById('package-title').textContent = name;
+                            document.getElementById('package-author').textContent = `${author} v${version}`;
+                            document.getElementById('package-description').textContent = description;
+                            document.getElementById('package-icon').src = 'data:image/png;base64,' + icon;
+                            console.log(longDescription)
+                            if (longDescription != undefined) {
+                                const descContainer = document.querySelector('.description');
+                                const label = document.createElement("h2");
+                                label.textContent = "Description";
+                                descContainer.appendChild(label);
+                                const desc = document.createElement("p");
+                                desc.textContent = longDescription;
+                                descContainer.appendChild(desc);
+                            }
+                            console.log(screenshotUrls)
+                            if (screenshotUrls.length != 0) {
+                                const screenshotUrlsArray = screenshotUrls;
+                                const screenshotsContainer = document.querySelector('.screenshots');
+                                const label = document.createElement("h2");
+                                label.textContent = "Preview";
+                                screenshotsContainer.appendChild(label);
+                                screenshotUrlsArray.forEach((screenshotUrl) => {
+                                    if (screenshotUrl) {
+                                        const img = document.createElement('img');
+                                        img.className = 'screenshot';
+                                        img.src = screenshotUrl;
+                                        img.alt = 'Screenshot';
+                                        screenshotsContainer.appendChild(img);
+                                    }
+                                });
+                            }
+                            if (!banner.includes("/undefined")) {
+                                const bannerContainer = document.querySelector('.banner_container');
+                                const img = document.createElement('img');
+                                img.className = 'banner'
+                                img.src = banner;
+                                bannerContainer.appendChild(img)
+                            }
+                        }
+                    });
+                }
+            }
+
             // Function to extract query parameters from the URL
             function getQueryParameter(name) {
                 const urlSearchParams = new URLSearchParams(window.location.search);
@@ -131,51 +237,15 @@
                 }
             }
 
-            // Populate content with package details from query parameters
+            // Get Package ID
             const packageName = getQueryParameter('name');
-            console.log('packageName:', packageName);
-            if (packageName) {
-                document.getElementById('package-title').textContent = packageName;
-            }
+            console.log('Tweak Name:', packageName);
 
-            const author = getQueryParameter('author');
-            console.log('author:', author);
-            if (author) {
-                document.getElementById('package-author').textContent = `By ${author}`;
-            }
-
-            const description = getQueryParameter('desc');
-            console.log('description:', description);
-            if (description) {
-                document.getElementById('package-description').textContent = description;
-            }
-
-            const longDescription = getQueryParameter('long_desc');
-            console.log('longDescription:', longDescription);
-            if (longDescription) {
-                document.getElementById('package-long-description').textContent = longDescription;
-            }
-
-            const icon = getQueryParameter('icon');
-            console.log('icon:', icon);
-            if (icon) {
-                document.getElementById('package-icon').src = 'data:image/png;base64,' + icon;
-            }
-
-            const screenshotUrl = getQueryParameter('screenshot');
-            console.log('screenshotUrl:', screenshotUrl);
-            if (screenshotUrl) {
-                const screenshotsContainer = document.querySelector('.screenshots');
-                const img = document.createElement('img');
-                img.className = 'screenshot';
-                img.src = screenshotUrl;
-                img.alt = 'Screenshot';
-                screenshotsContainer.appendChild(img);
-            }
-            
-            const url = getQueryParameter('url');
-            if (url) {
-                document.getElementById('install-button').href = url;
+            // Get Repo URL
+            const repourl = getQueryParameter('repourl');
+            console.log('Repo URL:', repourl);
+            if (repourl) {
+                loadPackageDataFromURL(repourl)
             }
         });
     </script>

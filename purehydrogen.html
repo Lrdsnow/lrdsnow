@@ -70,19 +70,9 @@
             'https://raw.githubusercontent.com/loyahdev/hydrogen/main/iconthemes.txt',
             'https://raw.githubusercontent.com/loyahdev/hydrogen/main/lsthemes.txt'
         ];
-        function showPackageDetail(mainURL, app, appName) {
-            const name = appName;
-            const description = app.shortDesc;
-            const long_description = app.longDesc;
-            const author = app.author;
-            const icon = app.b64icon;
-            const screenshot = app.preview;
-            const detailURL = `flux_detail.html?name=${encodeURIComponent(name)}&desc=${encodeURIComponent(description)}&long_desc=${encodeURIComponent(long_description)}&author=${encodeURIComponent(author)}&screenshot=${encodeURIComponent(screenshot)}&url=${encodeURIComponent(mainURL)}&icon=${encodeURIComponent(icon)}`;
+        function showPackageDetail(mainURL, appName) {
+            const detailURL = `flux_detail.html?name=${encodeURIComponent(appName)}&repourl=${encodeURIComponent(mainURL)}`;
             window.location.href = detailURL;
-        }
-        function hidePackageDetail() {
-            packageDetail.style.display = 'none';
-            appList.style.display = 'block';
         }
         function parseString(inputString) {
             const result = {};
@@ -144,7 +134,7 @@
 
                             appContainer.appendChild(appInfo);
                             appContainer.addEventListener('click', () => {
-                                showPackageDetail(appData.link, appData, appName);
+                                showPackageDetail(jsonUrls[i], appName);
                             });
 
                             appList.appendChild(appContainer);
