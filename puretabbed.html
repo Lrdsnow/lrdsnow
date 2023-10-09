@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PureWeb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset default styles and set up some basic styling */
+        .header {
+            background-color: #000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-start; /* Adjust alignment to the left */
+            align-items: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #d56cff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Tab bar container */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            backdrop-filter: blur(10px); /* Blurred background */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tab bar items (tabs) */
+        .tab-item {
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column; /* Icon above text */
+            align-items: center;
+        }
+
+        /* Icon styles */
+        .tab-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px; /* Spacing between icon and text */
+        }
+
+        /* Style for the active tab */
+        .tab-item.active {
+            color: #d400ff; /* Active tab color */
+        }
+
+        /* Content container */
+        .content {
+            padding: 60px 20px;
+            text-align: left;
+            color: #bf35ff;
+        }
+
+        .header {
+            background-color: #000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-start; /* Adjust alignment to the left */
+            align-items: center;
+        }
+
+        .back-button {
+            padding: 5px 10px;
+            background-color: #bf35ff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #bf35ff ;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            padding: 10px;
+            background-color: #000;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(148, 0, 185, 0.5);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .app-container:hover {
+            transform: scale(1.02);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+            border-radius: 10px;
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .repo-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            padding-left: 20px;
+            padding-top: 10px;
+        }
+
+        .app-description {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Updated CSS styles for the search bar */
+        .content#searchContent {
+            padding: 20px; /* Increase padding for better mobile readability */
+        }
+
+        /* Search container styles */
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: rgba(170, 0, 212, 0.2); /* Semi-transparent white background */
+            border-radius: 10px;
+            backdrop-filter: blur(10px); /* Blurred background effect */
+            padding: 10px;
+            margin-top: 20px; /* Add some spacing between the search bar and content */
+        }
+
+        /* Search input styles */
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 16px;
+            color: #bf35ff; /* Text color */
+        }
+
+        /* Search icon styles (FontAwesome icon) */
+        .search-icon {
+            font-size: 24px;
+            color: #bf35ff; /* Icon color */
+            margin-right: 10px; /* Spacing between icon and input */
+        }
+
+        /* Adjust the input field's width and padding for mobile */
+        @media (max-width: 768px) {
+            .search-input {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tab bar container -->
+    <div class="tab-bar">
+        <a href="#" class="tab-item" id="homeTab">
+            <i class="fas fa-home tab-icon"></i>
+            Home
+        </a>
+        <a href="#" class="tab-item" id="browseTab">
+            <i class="fas fa-bars tab-icon"></i>
+            Browse
+        </a>
+        <a href="#" class="tab-item" id="searchTab">
+            <i class="fas fa-search tab-icon"></i>
+            Search
+        </a>
+    </div>
+
+    <!-- Content container -->
+    <div class="content" id="homeContent" style="display: none;">
+        <!-- Your content for the Home tab goes here -->
+        <h1>PureWeb</h1>
+        <p>PureKFD for Web</p>
+    </div>
+
+    <!-- Additional content containers for other tabs (hidden by default) -->
+    <div class="content" id="browseContent" style="display: none;">
+        <div id="purekfd-repos">
+            <h2 class="repo-title">PureKFD Repos</h2>
+        </div>
+        <div id="picasso-repos">
+            <h2 class="repo-title">Picasso Repos</h2>
+        </div>
+        <div id="misaka-repos">
+            <h2 class="repo-title">Misaka Repos</h2>
+        </div>
+        <div id="package-detail" style="display: none;"></div>
+    
+        <script>
+            const packageDetail = document.getElementById('package-detail');
+            const jsonUrls = [
+                'https://raw.githubusercontent.com/Lrdsnow/lrdsnows-repo/main/PureKFDv4/purerepo.json',
+                'https://raw.githubusercontent.com/Dreel0akl/poopypoopermaybeworking/master/Essentials/manifest.json',
+                'https://raw.githubusercontent.com/dora727/KaedeFriedDora/master/Essentials/manifest.json',
+                'https://raw.githubusercontent.com/sourcelocation/Picasso-test-repo/main/manifest.json',
+                'https://bomberfish.ca/PicassoRepos/Essentials/manifest.json',
+                'https://raw.githubusercontent.com/circularsprojects/circles-repo/main/manifest.json',
+                'https://raw.githubusercontent.com/hanabiADHD/nbxyRepo/main/repo.json',
+                'https://puck.roeegh.com/repo.json',
+                'https://raw.githubusercontent.com/huligang/coolwcat/main/repo.json',
+                'https://yangjiii.tech/file/Repo/repo.json',
+                'https://raw.githubusercontent.com/leminlimez/leminrepo/main/repo.json',
+                'https://raw.githubusercontent.com/ichitaso/misaka/main/repo.json',
+                'https://raw.githubusercontent.com/chimaha/misakarepo/main/repo.json',
+                'https://raw.githubusercontent.com/sugiuta/repo-mdc/master/repo.json',
+                'https://raw.githubusercontent.com/34306/iPA/main/repo.json',
+                'https://raw.githubusercontent.com/EPOS05/EPOSbox/main/misaka.json',
+                'https://raw.githubusercontent.com/kloytofyexploiter/Misaka-repo_MRX/main/repo.json',
+                'https://raw.githubusercontent.com/HackZy01/misio/main/repo.json',
+                'https://misakarepojson.pages.dev/repo.json',
+                'https://raw.githubusercontent.com/sadending-ios/sadending.github.io/main/Misaka%20Tweaks/Ringtones%20Customer/repo.json',
+                'https://raw.githubusercontent.com/tyler10290/MisakaRepoBackup/main/repo.json',
+                'https://raw.githubusercontent.com/hanabiADHD/DekotasMirror/main/dekotas.json',
+                'https://gist.githubusercontent.com/c22dev/af8dd3a760330eb31da5f8751af1b487/raw/6eb744fabc6eb0eb3352ce41c9a08ce5c38c4e6a/index.json'
+            ];
+            function showRepoDetail(mainURL) {
+                const detailURL = `pkgviewer.html?repourl=${encodeURIComponent(mainURL)}`;
+                window.location.href = detailURL;
+            }
+            function showPackageDetail(mainURL, app) {
+                const pkgid = app.bundleid ?? app.PackageID;
+                const detailURL = `package_detail.html?repourl=${encodeURIComponent(mainURL)}&id=${encodeURIComponent(pkgid)}`;
+                window.location.href = detailURL;
+            }
+            function hidePackageDetail() {
+                packageDetail.style.display = 'none';
+                appList.style.display = 'block';
+            }
+            async function fetchApps() {
+                for (const url of jsonUrls) {
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        const appContainer = document.createElement('div');
+                        appContainer.className = 'app-container';
+                        const appIcon = document.createElement('img');
+                        appIcon.className = 'app-icon';
+                        appIcon.src = data.RepositoryIcon ?? url.substring(0, url.lastIndexOf('/') + 1) + data.icon;
+                        appContainer.appendChild(appIcon);
+                        const appInfo = document.createElement('div');
+                        const appTitle = document.createElement('p');
+                        appTitle.className = 'app-title';
+                        appTitle.textContent = data.name ?? data.RepositoryName;
+                        appInfo.appendChild(appTitle);
+                        const appDescription = document.createElement('p');
+                        appDescription.className = 'app-description';
+                        appDescription.textContent = data.description ?? data.RepositoryDescription;
+                        appInfo.appendChild(appDescription);
+                        appContainer.appendChild(appInfo);
+                        appContainer.addEventListener('click', () => {
+                            showRepoDetail(url);
+                        });
+                        if (Object.keys(data).includes("RepositoryName")) {
+                            const appList = document.getElementById('misaka-repos');
+                            appList.appendChild(appContainer);
+                        } else if (Object.keys(data).includes("repotype")) {
+                            const appList = document.getElementById('purekfd-repos');
+                            appList.appendChild(appContainer);
+                        } else {
+                            const appList = document.getElementById('picasso-repos');
+                            appList.appendChild(appContainer);
+                        }
+                    } catch (error) {
+                        console.error(`Error fetching data from ${url}:`, error);
+                    }
+                }
+            }
+            fetchApps();
+        </script>
+    </div>
+
+    <!-- Updated HTML for the search bar -->
+    <div class="content" id="searchContent" style="display: none;">
+        <h1>Search Packages</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search packages...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        <div id="searchResults"></div>
+    </div>   
+
+    <!-- JavaScript to handle tab switching and save the active tab to local storage -->
+    <script>
+        const tabItems = document.querySelectorAll('.tab-item');
+        const contentContainers = document.querySelectorAll('.content');
+
+        // Function to set the active tab based on local storage
+        function setActiveTabFromLocalStorage() {
+            const activeTabId = localStorage.getItem('activeTabId');
+            if (activeTabId) {
+                const activeTab = document.getElementById(activeTabId);
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                    const contentId = activeTabId.replace('Tab', 'Content');
+                    const activeContent = document.getElementById(contentId);
+                    if (activeContent) {
+                        activeContent.style.display = 'block';
+                    }
+                }
+            } else {
+                const activeContent = document.getElementById("homeContent");
+                if (activeContent) {
+                    activeContent.style.display = 'block';
+                }
+            }
+        }
+
+        // Add event listeners to tab items
+        tabItems.forEach((tabItem, index) => {
+            tabItem.addEventListener('click', () => {
+                tabItems.forEach((item) => {
+                    item.classList.remove('active');
+                });
+                contentContainers.forEach((container) => {
+                    container.style.display = 'none';
+                });
+
+                tabItem.classList.add('active');
+                const contentId = tabItem.id.replace('Tab', 'Content');
+                const activeContent = document.getElementById(contentId);
+                if (activeContent) {
+                    activeContent.style.display = 'block';
+                }
+
+                // Save the active tab to local storage
+                localStorage.setItem('activeTabId', tabItem.id);
+            });
+        });
+
+        // Get references to the search input field and results container
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        // Function to perform package search
+        function searchPackages(query) {
+            // Clear previous search results
+            searchResults.innerHTML = '';
+
+            // Loop through the JSON data and filter packages that match the query
+            for (const url of jsonUrls) {
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.packages && Array.isArray(data.packages)) {
+                            const matchingPackages = data.packages.filter(package => {
+                                const packageName = package.name.toLowerCase();
+                                return packageName.includes(query.toLowerCase());
+                            });
+
+                            if (matchingPackages.length > 0) {
+                                const repoTitle = document.createElement('h2');
+                                repoTitle.className = 'repo-title';
+                                repoTitle.textContent = data.name || data.RepositoryName;
+                                searchResults.appendChild(repoTitle);
+
+                                matchingPackages.forEach(app => {
+                                    const appContainer = document.createElement('div');
+                                    appContainer.className = 'app-container';
+                                    const appIcon = document.createElement('img');
+                                    appIcon.className = 'app-icon';
+                                    appIcon.src = app.Icon ?? url.substring(0, url.lastIndexOf('/') + 1) + app.icon;
+                                    appContainer.appendChild(appIcon);
+                                    const appInfo = document.createElement('div');
+                                    const appTitle = document.createElement('p');
+                                    appTitle.className = 'app-title';
+                                    appTitle.textContent = app.name ?? app.Name;
+                                    appInfo.appendChild(appTitle);
+                                    const appDescription = document.createElement('p');
+                                    appDescription.className = 'app-description';
+                                    appDescription.textContent = app.description ?? app.Description;
+                                    appInfo.appendChild(appDescription);
+                                    appContainer.appendChild(appInfo);
+                                    appContainer.addEventListener('click', () => {
+                                        showPackageDetail(url, app);
+                                    });
+
+                                    searchResults.appendChild(appContainer);
+                                });
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching data from ${url}:`, error);
+                    });
+            }
+        }
+
+        // Event listener for search input changes
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim();
+            searchPackages(query);
+        });
+
+        // Set the initial active tab from local storage
+        setActiveTabFromLocalStorage();
+    </script>
+</body>
+</html>
