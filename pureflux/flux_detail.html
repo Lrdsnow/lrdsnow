@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Detail</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #ae00ff;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-start; /* Adjust alignment to the left */
+            align-items: center;
+        }
+
+        .back-button {
+            padding: 5px 10px;
+            background-color: #ae00ff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Banner styles */
+        .banner {
+            width: 100%;
+            max-width: 100%;
+            height: 200px; /* Set your desired fixed height */
+            object-fit: cover; /* Clip and center the image within the fixed height */
+            border-radius: 15px;
+            margin: 10px 0;
+            padding: 10px; /* Add padding to the banner */
+            overflow: hidden; /* Hide any content that overflows the fixed height */
+        }
+
+        /* Package info styles */
+        .package-info {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #000;
+        }
+
+        .package-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
+
+        .package-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .package-author {
+            font-size: 14px;
+            color: rgba(183, 0, 255, 0.7);
+        }
+
+        .package-description {
+            font-size: 16px;
+        }
+
+        /* Description styles */
+        .description {
+            padding: 20px;
+            background-color: #000;
+        }
+
+        /* Screenshots styles */
+        .screenshots {
+            padding: 20px;
+            background-color: #000;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .screenshot {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with back button -->
+    <div class="header">
+        <a class="back-button" href="javascript:window.history.back();">Back</a>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner_container">
+    </div>
+
+    <!-- Package Info -->
+    <div class="package-info">
+        <img class="package-icon" src="" alt="Package Icon" id="package-icon">
+        <div>
+            <h2 class="package-title" id="package-title">Package Name</h2>
+            <p class="package-author" id="package-author">By Author v1.0</p>
+            <p class="package-description" id="package-description">Package Description</p>
+            <pre></pre>
+            <a class="back-button" id="install-button" href="">Install</a>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="description">
+    </div>
+
+    <!-- Screenshots -->
+    <div class="screenshots">
+        <!-- Screenshots will be added here dynamically -->
+    </div>
+    
+    <!-- JavaScript to populate content -->
+    <script>        
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to check if URL's are valid
+            function isValidURL(url) {
+                const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+                return urlPattern.test(url);
+            }
+
+            function parseString(inputString) {
+                const result = {};
+                const lines = inputString.split('\n');
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line != "") {
+                        result[lines[i]] = {
+                            "shortDesc": lines[i + 1],
+                            "link": lines[i + 2],
+                            "version": lines[i + 3],
+                            "b64icon": lines[i + 4]
+                        };
+                    }
+                    i += 4;
+                }
+                return result;
+            }
+
+            async function loadPackageDataFromURL(url) {
+                const TOKEN = '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';
+                const auth_response = await fetch(url, {
+                    headers: {
+                        'Authorization': `token ${TOKEN}`
+                    }
+                });
+
+                if (!auth_response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const auth_json = await auth_response.json();
+                const data = JSON.parse(atob(auth_json.content));
+                if (data) {
+                    Object.keys(data).forEach((appkey) => {
+                        if (appkey == packageName) {
+                            const app = data[appkey]
+                            document.getElementById('install-button').href = app.link;
+                            const name = packageName;
+                            const description = app.shortDesc;
+                            const longDescription = app.longDesc;
+                            const version = app.version ?? "1.0.0";
+                            const author = app.author ?? "";
+                            const icon = app.b64icon;
+                            const banner = app.HeaderImage ?? url.substring(0, url.lastIndexOf('/') + 1) + app.banner;
+                            const screenshotUrls = [app.preview];
+                            document.getElementById('package-title').textContent = name;
+                            document.getElementById('package-author').textContent = `${author} v${version}`;
+                            document.getElementById('package-description').textContent = description;
+                            document.getElementById('package-icon').src = 'data:image/png;base64,' + icon;
+                            console.log(longDescription)
+                            if (longDescription != undefined) {
+                                const descContainer = document.querySelector('.description');
+                                const label = document.createElement("h2");
+                                label.textContent = "Description";
+                                descContainer.appendChild(label);
+                                const desc = document.createElement("p");
+                                desc.textContent = longDescription;
+                                descContainer.appendChild(desc);
+                            }
+                            console.log(screenshotUrls)
+                            if (screenshotUrls[0] != undefined) {
+                                const screenshotUrlsArray = screenshotUrls;
+                                const screenshotsContainer = document.querySelector('.screenshots');
+                                const label = document.createElement("h2");
+                                label.textContent = "Preview";
+                                screenshotsContainer.appendChild(label);
+                                screenshotUrlsArray.forEach((screenshotUrl) => {
+                                    if (screenshotUrl) {
+                                        const img = document.createElement('img');
+                                        img.className = 'screenshot';
+                                        img.src = screenshotUrl;
+                                        img.alt = 'Screenshot';
+                                        screenshotsContainer.appendChild(img);
+                                    }
+                                });
+                            }
+                            if (!banner.includes("/undefined")) {
+                                const bannerContainer = document.querySelector('.banner_container');
+                                const img = document.createElement('img');
+                                img.className = 'banner'
+                                img.src = banner;
+                                bannerContainer.appendChild(img)
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Function to extract query parameters from the URL
+            function getQueryParameter(name) {
+                const urlSearchParams = new URLSearchParams(window.location.search);
+                try {
+                    const decodedValue = decodeURIComponent(urlSearchParams.get(name));
+                    return decodedValue || ''; // Use an empty string if the decoded value is falsy
+                } catch (error) {
+                    console.error(`Error decoding parameter '${name}':`, error);
+                    return ''; // Return an empty string in case of decoding error
+                }
+            }
+
+            // Get Package ID
+            const packageName = getQueryParameter('name');
+            console.log('Tweak Name:', packageName);
+            if (packageName) {
+                loadPackageDataFromURL('https://api.github.com/repos/Broco8Dev/Flux/contents/RepositoryManagement/Repos.json')
+            }
+        });
+    </script>
+</body>
+</html>
