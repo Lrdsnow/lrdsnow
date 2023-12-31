@@ -9,6 +9,8 @@
 - [APT Repo](https://github.com/Lrdsnow/lrdsnows-repo/tree/main/Linux) - An APT repo
 - [Starlight](https://raw.githubusercontent.com/Lrdsnow/ushos/main/installer.sh) - A pure black and purple theme for cinnamon
 - [lmt](https://github.com/Lrdsnow/kfd) - A package manager for Linux
+#### Random Stuff:
+- [Kids Phone Hax lol](https://github.com/Lrdsnow/MT6260A-stuff) - literally just funni stuff from a kids phone with an MT6260A
 
 ## Socials:
 - Twitter: [@Lrdsnow101](https://twitter.com/Lrdsnow101)
