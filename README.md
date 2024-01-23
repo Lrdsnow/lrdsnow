@@ -1,13 +1,15 @@
 # Hello
 
 ## Projects:
-#### iOS:
-- [PureKFD](https://github.com/lrdsnow/PureKFD) - A package/tweak manager for KFD and MDC that supports misaka & picasso tweaks
+#### Apple:
+- [PureKFD](https://github.com/lrdsnow/PureKFD) - A package/tweak manager for KFD and MDC
+- [PurePKG](https://github.com/Lrdsnow/PurePKG) - A jailbreak package/tweak manager
 - [SimpleKFD](https://github.com/lrdsnow/SimpleKFD) - A few simple tweaks for KFD
 - [KFD Offsets](https://github.com/lrdsnow/kfd_offsets) - Offsets for KFD
+- [SwiftKFD](https://github.com/Lrdsnow/SwiftKFD) - An easy to use module for using KFD on iOS/iPadOS/WatchOS/TvOS/MacOS
 #### Linux:
-- [APT Repo](https://github.com/Lrdsnow/lrdsnows-repo/tree/main/Linux) - An APT repo
-- [Starlight](https://raw.githubusercontent.com/Lrdsnow/ushos/main/installer.sh) - A pure black and purple theme for cinnamon
+- [StarlightLinux Repo](https://github.com/Lrdsnow/StarLightLinux/tree/main/Repo) - An APT repo
+- [StarlightLinux](https://github.com/Lrdsnow/StarLightLinux) - An OLED Experience for Debian Based Linux
 - [lmt](https://github.com/Lrdsnow/kfd) - A package manager for Linux
 #### Random Stuff:
 - [Kids Phone Hax lol](https://github.com/Lrdsnow/MT6260A-stuff) - literally just funni stuff from a kids phone with an MT6260A
