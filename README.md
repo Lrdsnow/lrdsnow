@@ -13,6 +13,8 @@
 - [lmt](https://github.com/Lrdsnow/kfd) - A package manager for Linux
 #### Random Stuff:
 - [Kids Phone Hax lol](https://github.com/Lrdsnow/MT6260A-stuff) - literally just funni stuff from a kids phone with an MT6260A
+- [Asus C523N](https://github.com/Lrdsnow/AsusC523N) - dumped stuff from an asus c523n chromebook
+- [HP 17-cp0700dx Hackintosh](https://github.com/Lrdsnow/HP-R5-5500U-Hackintosh) - my laptops hackintosh efi
 
 ## Socials:
 - Twitter: [@Lrdsnow101](https://twitter.com/Lrdsnow101)
