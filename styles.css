@@ -83,6 +83,12 @@ body {
     transform: scale(1.05);
 }
 
+.contacts {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .contact-box {
     display: flex;
     align-items: center;
@@ -110,4 +116,20 @@ body {
 
 .content-section.active {
     display: block;
+}
+
+@media only screen and (max-width: 480px) and (orientation: portrait) {
+    .sidebar {
+        height: 150px;
+        width: 100%;
+    }
+    .main-content {
+        margin-left: 0px;
+    }
+    .projects {
+        flex-direction: column;
+    }
+    body {
+        background: linear-gradient(to bottom, pink, purple, black);
+    }
 }
