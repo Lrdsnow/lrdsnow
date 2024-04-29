@@ -1,150 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lrdsnow</title>
-  <style>
-    body {
-      background-color: #000000;
-      color: #b742ff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .container {
-      text-align: center;
-      padding: 20px;
-      border: 2px solid #b742ff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
-    }
-    
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-    .projects {
-      margin-top: 30px;
-    }
-    .project {
-      margin-bottom: 20px;
-      text-align: left;
-      padding: 10px;
-      border: 2px solid #b742ff;
-      border-radius: 10px;
-      background-color: #000000;
-    }
-    .project h2 {
-      font-size: 1.8rem;
-      margin-bottom: 5px;
-    }
-    .project p {
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-    }
-    .button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      color: #b742ff;
-      background-color: #000000;
-      border: 1px solid #b742ff;
-      text-decoration: none;
-      box-shadow: 0 0 5px rgba(128, 0, 128, 0.5);
-    }
-    .button:hover {
-      background-color: #b742ff;
-      color: #000000;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lrdsnow</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Lrdsnow</h1>
-    <p>Hewwoo I'm a software developer :3</p>
-    <div class="projects">
-      <div class="project">
-        <h2>PureKFD</h2>
-        <p>KFD Tweak manager for iOS 15.0-15.7.6 & 16.0-16.6b1</p>
-        <div class="buttons">
-          <a class="button" href="https://github.com/Lrdsnow/PureKFD">Source</a>
-          <a class="button" href="purekfd">Repo Viewer</a>
-          <a class="button" href="https://github.com/Lrdsnow/PureKFD/releases">Download</a>
-        </div>
-      </div>
-      <div class="project">
-        <h2>Revival</h2>
-        <p>A Nintendo Switch Software JB for firmware 16.0.3 (No Promises)</p>
-        <div class="buttons">
-          <a class="button" href="https://github.com/Lrdsnow/Revival">Coming soon</a>
-        </div>
-      </div>
-      <div class="project">
-        <h2>SimpleKFD</h2>
-        <p>KFD Tweaks for iOS 15.0-15.7.6 arm64e & arm64 and iOS 16.0-16.5 & 16.6b1 arm64e</p>
-        <div class="buttons">
-          <a class="button" href="https://github.com/Lrdsnow/SimpleKFD">Source</a>
-          <a class="button" href="https://github.com/Lrdsnow/SimpleKFD/releases">Download</a>
-        </div>
-      </div>
-      <div class="project">
-        <h2>Element Package Manager</h2>
-        <p> A package manager for linux </p>
-        <div class="buttons">
-          <a class="button" href="https://github.com/Lrdsnow/lmt">Source</a>
-          <a class="button" href="https://github.com/Lrdsnow/lmt/releases">Download</a>
-        </div>
-      </div>
-      <div class="project">
-        <h2>UshOS</h2>
-        <p>My autoinstall script for Linux mint (themes and dev tools)</p>
-        <div class="buttons">
-          <a class="button" href="https://github.com/Lrdsnow/ushos">GitHub</a>
-          <a class="button" href="https://raw.githubusercontent.com/Lrdsnow/ushos/main/installer.sh">Download</a>
-        </div>
-      </div>
-      <div class="project">
-        <h2>Forgotten Fate</h2>
-        <p> An incomplete horror game</p>
-        <div class="buttons">
-          <a class="button" href="https://github.com/Lrdsnow/forgotten-fate-tfs">Github</a>
-          <a class="button" href="https://trifate-studios.itch.io/forgotten-fate">Download</a>
-        </div>
-      </div>
-      <div class="project">
-        <h2>My KFD Stuff</h2>
-        <p> This is a collection of my development for kfd, A kernel exploit for iOS 13.0-16.5 & 16.6b1 </p>
-        <div class="buttons">
-          <a class="button" href="https://github.com/stars/Lrdsnow/lists/kfd-stuff">Collection</a>
-        </div>
-      </div>
-    <div class="project">
-        <h2>Socials</h2>
-        <p>My Socials (Easiest way to reach me is on discord)</p>
-        <div class="buttons">
-          <a class="button" href="https://discord.com/users/795352247185571851">Discord</a>
-          <a class="button" href="https://twitter.com/Lrdsnow101">Twitter</a>
-          <a class="button" href="https://www.reddit.com/user/Enough_Protection947">Reddit</a>
-          <a class="button" href="https://lrdsnow.itch.io/">itch</a>
-        </div>
-      </div>
+    <div class="sidebar">
+        <a href="#home" class="sidebar-item" data-target="home">
+            <i class="fas fa-home"></i>Home
+        </a>
+        <a href="#purepkg" class="sidebar-item" data-target="purepkg">
+            <i class="fas fa-cube"></i>  PurePKG
+        </a>
+        <a href="#purekfd" class="sidebar-item" data-target="purekfd">
+            <i class="fas fa-star"></i>  PureKFD
+        </a>
     </div>
-  </div>
+    <div class="main-content">
+        <div id="home" class="content-section">
+            <h1 class="title">Lrdsnow</h1>
+            <div class="projects">
+                <a class="contact-box" href="https://github.com/lrdsnow">
+                    <i style="font-size: 40px" class="fa-brands fa-github"></i>
+                </a>
+                <a class="contact-box" href="https://twitter.com/Lrdsnow101">
+                    <i style="font-size: 40px" class="fa-brands fa-twitter"></i>
+                </a>
+                <a class="contact-box" href="https://lrdsnow.itch.io/">
+                    <i style="font-size: 40px" class="fa-brands fa-itch-io"></i>
+                </a>
+                <a class="contact-box" href="https://discord.com/users/795352247185571851">
+                    <i style="font-size: 35px" class="fa-brands fa-discord"></i>
+                </a>
+            </div>
+        </div>
+        <div id="purepkg" class="content-section">
+            <h1 class="title">PurePKG</h1>
+            <div class="projects">
+                <a class="contact-box" href="https://github.com/lrdsnow/purepkg">
+                    <i style="font-size: 40px" class="fa-brands fa-github"></i>
+                </a>
+                <a class="contact-box" href="https://discord.gg/purepkg">
+                    <i style="font-size: 35px" class="fa-brands fa-discord"></i>
+                </a>
+                <a class="contact-box" href="https://lrdsnow.github.io/purepkg">
+                    <i style="font-size: 35px" class="fa-solid fa-globe"></i>
+                </a>
+            </div>
+            <br>
+            <div class="projects">
+                <div class="project-box">
+                    <h2>Customizable</h2>
+                    <p>PurePKG is a highly customizable package manager for modified apple devices, allowing you to make your package manager yours.</p>
+                </div>
+                <div class="project-box">
+                    <h2>Compatible</h2>
+                    <p>Supports:<br>iOS 13.0+<br>tvOS 13.0+<br>MacOS 13.0+<br>watchOS 8.0+<br>visionOS 1.0+</p>
+                </div>
+            </div>
+        </div>
+        <div id="purekfd" class="content-section">
+            <h1 class="title">PureKFD</h1>
+            <div class="projects">
+                <a class="contact-box" href="https://github.com/purekfd/purekfd">
+                    <i style="font-size: 40px" class="fa-brands fa-github"></i>
+                </a>
+                <a class="contact-box" href="https://discord.gg/purepkg">
+                    <i style="font-size: 35px" class="fa-brands fa-discord"></i>
+                </a>
+            </div>
+            <br>
+            <div class="projects">
+                <div class="project-box">
+                    <h2>About</h2>
+                    <p>PureKFD is an elegant open-source jailed package manager that uses KFD & MDC to customize your iPhone.</p>
+                </div>
+                <div class="project-box">
+                    <h2>Compatiblity</h2>
+                    <p>Supports:<br>iOS 14.0-16.6.1<br></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
-
