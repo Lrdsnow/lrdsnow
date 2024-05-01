@@ -120,8 +120,13 @@ body {
 
 @media only screen and (max-width: 480px) and (orientation: portrait) {
     .sidebar {
-        height: 150px;
+        height: 70px;
         width: 100%;
+        flex-direction: row;
+    }
+    .sidebar-item {
+        flex-direction: column;
+        justify-content: center;
     }
     .main-content {
         margin-left: 0px;
