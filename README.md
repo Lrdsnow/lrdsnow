@@ -22,6 +22,6 @@
 ## Socials:
 - Twitter: [@Lrdsnow101](https://twitter.com/Lrdsnow101)
 - Discord: [@lrdsnow](https://discord.com/users/795352247185571851)
-- Discord Support Server: [PureKFD](https://discord.gg/purebox-1140456506119176224)
+- Discord Support Server: [PureKFD](https://discord.gg/cCSwxqdvzx)
 
 [![Lrdsnow's GitHub stats](https://github-readme-stats.vercel.app/api?username=lrdsnow)](https://github.com/anuraghazra/github-readme-stats)
