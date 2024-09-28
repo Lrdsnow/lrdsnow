@@ -8,6 +8,9 @@
 - [KFD Offsets](https://github.com/lrdsnow/kfd_offsets) - Offsets for KFD
 - [SwiftKFD](https://github.com/Lrdsnow/SwiftKFD) - An easy to use module for using KFD on iOS/iPadOS/WatchOS/TvOS/MacOS
 - [EUEnabler](https://github.com/Lrdsnow/EUEnabler) - A script i regret making that enables EU app support on devices outside of the EU
+#### Android:
+- [AndroidRestore](https://github.com/Lrdsnow/AndroidRestore) - Restore iOS Backups to Android Devices
+- [PureNotes](https://github.com/Lrdsnow/PureNotes) - Apple Notes on Android
 #### Linux:
 - [StarlightLinux Repo](https://github.com/Lrdsnow/StarLightLinux/tree/main/Repo) - An APT repo
 - [StarlightLinux](https://github.com/Lrdsnow/StarLightLinux) - An OLED Experience for Debian Based Linux
