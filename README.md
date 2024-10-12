@@ -17,6 +17,7 @@
 - [lmt](https://github.com/Lrdsnow/kfd) - A package manager for Linux
 #### Anki Overdrive:
 - [PureDriveSDKApple](https://github.com/Lrdsnow/PureDriveSDKApple) - Rewritten Anki Drive SDK for Apple platforms, for PureDrive
+- [PureDriveSDKCPP](https://github.com/Lrdsnow/PureDriveSDKCPP) - Rewritten Anki Drive SDK in C++, for PureDrive
 #### Random Stuff:
 - [Kids Phone Hax lol](https://github.com/Lrdsnow/MT6260A-stuff) - literally just funni stuff from a kids phone with an MT6260A
 - [Asus C523N](https://github.com/Lrdsnow/AsusC523N) - dumped stuff from an asus c523n chromebook
