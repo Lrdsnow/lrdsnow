@@ -5,6 +5,7 @@
 - [PureKFD](https://github.com/lrdsnow/PureKFD) - A package/tweak manager for KFD, MDC & SR
 - [PureKFD5](https://github.com/lrdsnow/PureKFD5) - A package/tweak manager for KFD & MDC (forked from PureKFD v5)
 - [PurePKG](https://github.com/Lrdsnow/PurePKG) - A jailbreak package/tweak manager
+- [Cydia²](https://github.com/Lrdsnow/cydia2) - A jailbreak package/tweak manager that looks like Cydia, but is just PurePKG
 - [SimpleKFD](https://github.com/lrdsnow/SimpleKFD) - A few simple tweaks for KFD
 - [KFD Offsets](https://github.com/lrdsnow/kfd_offsets) - Offsets for KFD
 - [SwiftKFD](https://github.com/Lrdsnow/SwiftKFD) - An easy to use module for using KFD on iOS/iPadOS/WatchOS/TvOS/MacOS
@@ -25,6 +26,7 @@
 - [Kids Phone Hax lol](https://github.com/Lrdsnow/MT6260A-stuff) - literally just funni stuff from a kids phone with an MT6260A
 - [Asus C523N](https://github.com/Lrdsnow/AsusC523N) - dumped stuff from an asus c523n chromebook
 - [HP 17-cp0700dx Hackintosh](https://github.com/Lrdsnow/HP-R5-5500U-Hackintosh) - my laptops hackintosh efi
+- [purecord](https://github.com/Lrdsnow/purecord) - an abandonded discord client in flutter
 
 ## Socials:
 - Twitter: [@Lrdsnow101](https://twitter.com/Lrdsnow101)
