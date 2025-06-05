@@ -3,6 +3,7 @@
 ## Projects:
 #### Apple:
 - [PureKFD](https://github.com/lrdsnow/PureKFD) - A package/tweak manager for KFD, MDC & SR
+- [PureKFD5](https://github.com/lrdsnow/PureKFD5) - A package/tweak manager for KFD & MDC (forked from PureKFD v5)
 - [PurePKG](https://github.com/Lrdsnow/PurePKG) - A jailbreak package/tweak manager
 - [SimpleKFD](https://github.com/lrdsnow/SimpleKFD) - A few simple tweaks for KFD
 - [KFD Offsets](https://github.com/lrdsnow/kfd_offsets) - Offsets for KFD
