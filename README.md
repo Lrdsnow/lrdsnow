@@ -20,6 +20,8 @@
 #### Anki Overdrive:
 - [PureDriveSDKApple](https://github.com/Lrdsnow/PureDriveSDKApple) - Rewritten Anki Drive SDK for Apple platforms, for PureDrive
 - [PureDriveSDKCPP](https://github.com/Lrdsnow/PureDriveSDKCPP) - Rewritten Anki Drive SDK in C++, for PureDrive
+#### Anki Drive:
+- [AnkiDriversLicense](https://github.com/Lrdsnow/AnkiDriversLicense) - Get the Anki Drive app working on modern versions of iOS!
 #### Anki Vector:
 - [VecErrCam](https://github.com/Lrdsnow/VecErrCam) - Scan Vector's errors for their descriptions!
 #### Random Stuff:
